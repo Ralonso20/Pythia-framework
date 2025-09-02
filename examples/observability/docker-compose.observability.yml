@@ -1,0 +1,147 @@
+version: '3.8'
+
+services:
+  # Grafana Dashboard
+  grafana:
+    image: grafana/grafana:latest
+    container_name: pythia-grafana
+    ports:
+      - "3000:3000"
+    environment:
+      - GF_SECURITY_ADMIN_PASSWORD=admin
+      - GF_FEATURE_TOGGLES_ENABLE=traceqlEditor
+      - GF_INSTALL_PLUGINS=grafana-piechart-panel
+    volumes:
+      - grafana-data:/var/lib/grafana
+      - ./grafana/provisioning:/etc/grafana/provisioning
+      - ./grafana/dashboards:/var/lib/grafana/dashboards
+    networks:
+      - pythia-observability
+    restart: unless-stopped
+
+  # Prometheus Metrics
+  prometheus:
+    image: prom/prometheus:latest
+    container_name: pythia-prometheus
+    ports:
+      - "9090:9090"
+    command:
+      - '--config.file=/etc/prometheus/prometheus.yml'
+      - '--storage.tsdb.path=/prometheus'
+      - '--web.console.libraries=/etc/prometheus/console_libraries'
+      - '--web.console.templates=/etc/prometheus/consoles'
+      - '--storage.tsdb.retention.time=15d'
+      - '--web.enable-lifecycle'
+      - '--web.enable-admin-api'
+    volumes:
+      - ./prometheus/prometheus.yml:/etc/prometheus/prometheus.yml
+      - ./prometheus/pythia_alerts.yml:/etc/prometheus/pythia_alerts.yml
+      - prometheus-data:/prometheus
+    networks:
+      - pythia-observability
+    restart: unless-stopped
+
+  # Tempo Distributed Tracing
+  tempo:
+    image: grafana/tempo:latest
+    container_name: pythia-tempo
+    ports:
+      - "3200:3200"   # Tempo query
+      - "14268:14268" # Jaeger ingest
+      - "9411:9411"   # Zipkin
+    command: [ "-config.file=/etc/tempo.yaml" ]
+    volumes:
+      - ./tempo/tempo.yaml:/etc/tempo.yaml
+      - tempo-data:/tmp/tempo
+    networks:
+      - pythia-observability
+    restart: unless-stopped
+
+  # Loki Log Aggregation (Optional)
+  loki:
+    image: grafana/loki:latest
+    container_name: pythia-loki
+    ports:
+      - "3100:3100"
+    command: -config.file=/etc/loki/local-config.yaml
+    volumes:
+      - loki-data:/loki
+    networks:
+      - pythia-observability
+    restart: unless-stopped
+
+  # OpenTelemetry Collector
+  otel-collector:
+    image: otel/opentelemetry-collector-contrib:latest
+    container_name: pythia-otel-collector
+    command: ["--config=/etc/otel-collector-config.yaml"]
+    volumes:
+      - ./otel/otel-collector-config.yaml:/etc/otel-collector-config.yaml
+    ports:
+      - "4317:4317"   # OTLP gRPC receiver
+      - "4318:4318"   # OTLP HTTP receiver
+      - "8888:8888"   # Prometheus metrics from collector
+      - "8889:8889"   # Prometheus metrics endpoint
+    networks:
+      - pythia-observability
+    depends_on:
+      - tempo
+      - prometheus
+    restart: unless-stopped
+
+  # Jaeger UI (Alternative to Tempo for trace viewing)
+  jaeger:
+    image: jaegertracing/all-in-one:latest
+    container_name: pythia-jaeger
+    ports:
+      - "16686:16686" # Jaeger UI
+      - "14250:14250" # gRPC
+    environment:
+      - COLLECTOR_OTLP_ENABLED=true
+    networks:
+      - pythia-observability
+    restart: unless-stopped
+
+  # Redis for demo worker
+  redis:
+    image: redis:7-alpine
+    container_name: pythia-redis
+    ports:
+      - "6379:6379"
+    networks:
+      - pythia-observability
+    restart: unless-stopped
+
+  # Demo Pythia Worker
+  pythia-worker:
+    build:
+      context: .
+      dockerfile: Dockerfile.worker
+    container_name: pythia-demo-worker
+    environment:
+      - REDIS_URL=redis://redis:6379
+      - OTEL_SERVICE_NAME=pythia-demo-worker
+      - OTEL_SERVICE_VERSION=1.0.0
+      - OTEL_EXPORTER_OTLP_ENDPOINT=http://otel-collector:4317
+      - PYTHIA_METRICS_ENABLED=true
+      - PYTHIA_TRACING_ENABLED=true
+      - PYTHIA_LOG_LEVEL=INFO
+      - PYTHIA_LOG_FORMAT=json
+    depends_on:
+      - redis
+      - otel-collector
+    networks:
+      - pythia-observability
+    restart: unless-stopped
+    ports:
+      - "8000:8000"  # Metrics endpoint
+
+volumes:
+  grafana-data:
+  prometheus-data:
+  tempo-data:
+  loki-data:
+
+networks:
+  pythia-observability:
+    driver: bridge

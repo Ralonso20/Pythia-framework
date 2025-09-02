@@ -1,0 +1,35 @@
+{
+  "timestamp": "2025-08-31T15:52:53.226258+00:00",
+  "config": {
+    "broker": "redis",
+    "duration": 30,
+    "message_rate": 5000,
+    "message_size": 1024,
+    "workers": 4,
+    "batch_size": 10,
+    "output_format": "json",
+    "results_dir": "./results/20250831"
+  },
+  "total_messages": 99490,
+  "duration_seconds": 30.110378980636597,
+  "messages_per_second": 3304.176279680176,
+  "avg_latency_ms": 0.44911887668918915,
+  "p95_latency_ms": 0.618,
+  "p99_latency_ms": 2.24254,
+  "error_count": 0,
+  "error_rate": 0.0,
+  "cpu_usage_percent": 4.228571428571429,
+  "memory_usage_mb": 7877.203125,
+  "broker_metrics": {
+    "redis_version": "7.4.5",
+    "used_memory": 1146512,
+    "used_memory_human": "1.09M",
+    "connected_clients": 1,
+    "total_commands_processed": 827797,
+    "instantaneous_ops_per_sec": 6365,
+    "keyspace_hits": 0,
+    "keyspace_misses": 0,
+    "test_type": "lists",
+    "queue_name": "benchmark-queue"
+  }
+}

@@ -1,0 +1,8 @@
+{
+    "worker_name": "my_sync_worker",
+    "source_connection": "postgresql://user:password@localhost:5432/source_db",
+    "target_connection": "mysql://user:password@localhost:3306/target_db",
+    "sync_mode": ["incremental", "full"],
+    "batch_size": "1000",
+    "python_version": "3.9"
+}

@@ -1,0 +1,16 @@
+global:
+  scrape_interval: 15s
+  evaluation_interval: 15s
+
+scrape_configs:
+  # Prometheus self-monitoring
+  - job_name: 'prometheus'
+    static_configs:
+      - targets: ['localhost:9090']
+
+  # Pythia Workers (will be added dynamically)
+  - job_name: 'pythia-workers'
+    static_configs:
+      - targets: []  # Populated by benchmark scripts
+    scrape_interval: 5s
+    metrics_path: /metrics

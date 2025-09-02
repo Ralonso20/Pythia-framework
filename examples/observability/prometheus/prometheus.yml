@@ -1,0 +1,56 @@
+global:
+  scrape_interval: 15s
+  evaluation_interval: 15s
+  external_labels:
+    monitor: 'pythia-monitor'
+
+scrape_configs:
+  # Pythia Workers
+  - job_name: 'pythia-workers'
+    static_configs:
+      - targets:
+          - 'pythia-worker:8000'
+          - 'host.docker.internal:8000'  # For local development
+    scrape_interval: 5s
+    metrics_path: '/metrics'
+    honor_labels: true
+
+  # OpenTelemetry Collector
+  - job_name: 'otel-collector'
+    static_configs:
+      - targets: ['otel-collector:8888']
+    scrape_interval: 10s
+
+  # Prometheus itself
+  - job_name: 'prometheus'
+    static_configs:
+      - targets: ['localhost:9090']
+
+  # Grafana
+  - job_name: 'grafana'
+    static_configs:
+      - targets: ['grafana:3000']
+
+  # Redis (if redis_exporter is used)
+  - job_name: 'redis'
+    static_configs:
+      - targets: ['redis:6379']
+    scrape_interval: 10s
+
+# Alerting rules
+rule_files:
+  - "pythia_alerts.yml"
+
+# Alertmanager configuration (optional)
+alerting:
+  alertmanagers:
+    - static_configs:
+        - targets:
+          # - alertmanager:9093
+
+# Global configuration for remote write (optional - for long-term storage)
+# remote_write:
+#   - url: "https://your-remote-prometheus/api/v1/write"
+#     basic_auth:
+#       username: "user"
+#       password: "password"

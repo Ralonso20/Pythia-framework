@@ -1,0 +1,30 @@
+FROM python:3.11-slim
+
+# Install system dependencies
+RUN apt-get update && apt-get install -y \
+    gcc \
+    && rm -rf /var/lib/apt/lists/*
+
+# Install Python dependencies
+RUN pip install --no-cache-dir \
+    locust==2.17.0 \
+    kafka-python==2.0.2 \
+    pika==1.3.2 \
+    redis==5.0.1 \
+    pydantic==2.5.0 \
+    asyncio \
+    aiohttp \
+    prometheus-client
+
+# Create non-root user
+RUN groupadd -r locust && useradd -r -g locust locust
+RUN mkdir -p /home/locust && chown -R locust:locust /home/locust
+
+# Set working directory
+WORKDIR /mnt/locust
+
+# Switch to non-root user
+USER locust
+
+# Default command
+CMD ["locust", "--help"]

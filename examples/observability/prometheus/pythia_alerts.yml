@@ -1,0 +1,168 @@
+groups:
+  - name: pythia_workers
+    interval: 30s
+    rules:
+      # High error rate alert
+      - alert: PythiaHighErrorRate
+        expr: >
+          (
+            rate(pythia_messages_processed_total{status="error"}[5m]) /
+            rate(pythia_messages_processed_total[5m])
+          ) * 100 > 5
+        for: 2m
+        labels:
+          severity: warning
+          component: pythia
+        annotations:
+          summary: "High error rate detected in Pythia worker"
+          description: >
+            Worker {{ $labels.worker_type }} has an error rate of {{ $value | printf "%.2f" }}%
+            over the last 5 minutes.
+          runbook_url: "https://your-docs.com/runbooks/high-error-rate"
+
+      # High processing latency alert
+      - alert: PythiaHighProcessingLatency
+        expr: >
+          histogram_quantile(0.95,
+            rate(pythia_message_processing_duration_seconds_bucket[5m])
+          ) > 5
+        for: 1m
+        labels:
+          severity: warning
+          component: pythia
+        annotations:
+          summary: "High processing latency in Pythia worker"
+          description: >
+            Worker {{ $labels.worker_type }} P95 latency is {{ $value | printf "%.2f" }}s
+            which is above the 5s threshold.
+          runbook_url: "https://your-docs.com/runbooks/high-latency"
+
+      # Queue backlog alert
+      - alert: PythiaQueueBacklog
+        expr: pythia_queue_size > 1000
+        for: 5m
+        labels:
+          severity: critical
+          component: pythia
+        annotations:
+          summary: "Large queue backlog detected"
+          description: >
+            Queue {{ $labels.queue_name }} has {{ $value }} pending messages,
+            indicating a processing bottleneck.
+          runbook_url: "https://your-docs.com/runbooks/queue-backlog"
+
+      # Worker down alert
+      - alert: PythiaWorkerDown
+        expr: up{job="pythia-workers"} == 0
+        for: 1m
+        labels:
+          severity: critical
+          component: pythia
+        annotations:
+          summary: "Pythia worker is down"
+          description: >
+            Worker instance {{ $labels.instance }} is not responding to health checks.
+            Immediate attention required.
+          runbook_url: "https://your-docs.com/runbooks/worker-down"
+
+      # Low message throughput alert
+      - alert: PythiaLowThroughput
+        expr: >
+          rate(pythia_messages_processed_total[5m]) < 0.1
+        for: 10m
+        labels:
+          severity: warning
+          component: pythia
+        annotations:
+          summary: "Low message processing throughput"
+          description: >
+            Worker {{ $labels.worker_type }} is processing fewer than 0.1 messages/second
+            over the last 5 minutes, which may indicate an issue.
+
+      # High active messages alert (potential memory leak)
+      - alert: PythiaHighActiveMessages
+        expr: pythia_active_messages > 100
+        for: 5m
+        labels:
+          severity: warning
+          component: pythia
+        annotations:
+          summary: "High number of active messages"
+          description: >
+            Worker {{ $labels.worker_type }} has {{ $value }} active messages,
+            which may indicate slow processing or a potential memory leak.
+
+      # Dead letter queue alert
+      - alert: PythiaDeadLetterQueue
+        expr: pythia_queue_size{queue_type="dlq"} > 10
+        for: 2m
+        labels:
+          severity: warning
+          component: pythia
+        annotations:
+          summary: "Messages accumulating in dead letter queue"
+          description: >
+            Dead letter queue {{ $labels.queue_name }} has {{ $value }} failed messages
+            that require manual intervention.
+
+  # Infrastructure alerts
+  - name: pythia_infrastructure
+    interval: 30s
+    rules:
+      # High CPU usage
+      - alert: PythiaHighCPUUsage
+        expr: >
+          100 - (avg by(instance) (irate(node_cpu_seconds_total{mode="idle"}[5m])) * 100) > 80
+        for: 5m
+        labels:
+          severity: warning
+          component: infrastructure
+        annotations:
+          summary: "High CPU usage on Pythia worker host"
+          description: >
+            Host {{ $labels.instance }} is using {{ $value | printf "%.2f" }}% CPU
+            which may impact worker performance.
+
+      # High memory usage
+      - alert: PythiaHighMemoryUsage
+        expr: >
+          (1 - (node_memory_MemAvailable_bytes / node_memory_MemTotal_bytes)) * 100 > 80
+        for: 5m
+        labels:
+          severity: warning
+          component: infrastructure
+        annotations:
+          summary: "High memory usage on Pythia worker host"
+          description: >
+            Host {{ $labels.instance }} is using {{ $value | printf "%.2f" }}% memory
+            which may cause worker instability.
+
+  # Broker-specific alerts
+  - name: pythia_brokers
+    interval: 30s
+    rules:
+      # Redis connection issues
+      - alert: PythiaRedisConnectionFailed
+        expr: pythia_broker_connection_errors_total{broker_type="redis"} > 0
+        for: 1m
+        labels:
+          severity: critical
+          component: broker
+        annotations:
+          summary: "Redis connection failures detected"
+          description: >
+            Worker {{ $labels.worker_type }} is experiencing Redis connection failures.
+            Current error count: {{ $value }}
+
+      # Kafka consumer lag
+      - alert: PythiaKafkaConsumerLag
+        expr: pythia_kafka_consumer_lag > 1000
+        for: 5m
+        labels:
+          severity: warning
+          component: broker
+        annotations:
+          summary: "High Kafka consumer lag"
+          description: >
+            Consumer {{ $labels.consumer_group }} on topic {{ $labels.topic }}
+            has a lag of {{ $value }} messages.

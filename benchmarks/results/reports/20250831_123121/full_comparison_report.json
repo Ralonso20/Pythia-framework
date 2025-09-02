@@ -1,0 +1,88 @@
+{
+  "timestamp": "2025-08-31T15:31:21.399745+00:00",
+  "comparison_type": "broker_performance",
+  "results": [
+    {
+      "timestamp": "2025-08-31T15:31:02.475889+00:00",
+      "config": {
+        "broker": "rabbitmq",
+        "duration": 60,
+        "message_rate": 1000,
+        "message_size": 1024,
+        "workers": 2,
+        "batch_size": 10,
+        "output_format": "json",
+        "results_dir": "./results/20250831"
+      },
+      "total_messages": 31738,
+      "duration_seconds": 60.1421320438385,
+      "messages_per_second": 527.7165760745844,
+      "avg_latency_ms": 0.0,
+      "p95_latency_ms": 0.0,
+      "p99_latency_ms": 0.0,
+      "error_count": 0,
+      "error_rate": 0.0,
+      "cpu_usage_percent": 8.18909090909091,
+      "memory_usage_mb": 8105.874431818182,
+      "broker_metrics": {
+        "queue_name": "benchmark-queue",
+        "exchange": "benchmark-queue_exchange",
+        "routing_key": "benchmark-queue",
+        "durable": true
+      }
+    },
+    {
+      "timestamp": "2025-08-31T15:27:32.044737+00:00",
+      "config": {
+        "broker": "redis",
+        "duration": 60,
+        "message_rate": 1000,
+        "message_size": 1024,
+        "workers": 2,
+        "batch_size": 10,
+        "output_format": "json",
+        "results_dir": "./results/20250831"
+      },
+      "total_messages": 36555,
+      "duration_seconds": 60.1163272857666,
+      "messages_per_second": 608.0710790303871,
+      "avg_latency_ms": 1.01439166284929,
+      "p95_latency_ms": 1.451,
+      "p99_latency_ms": 1.99,
+      "error_count": 0,
+      "error_rate": 0.0,
+      "cpu_usage_percent": 8.112727272727273,
+      "memory_usage_mb": 8183.824715909091,
+      "broker_metrics": {
+        "redis_version": "7.4.5",
+        "used_memory": 1121928,
+        "used_memory_human": "1.07M",
+        "connected_clients": 1,
+        "total_commands_processed": 73120,
+        "instantaneous_ops_per_sec": 1185,
+        "keyspace_hits": 0,
+        "keyspace_misses": 0,
+        "test_type": "lists",
+        "queue_name": "benchmark-queue"
+      }
+    }
+  ],
+  "summary": {
+    "rabbitmq": {
+      "throughput_msg_per_sec": 527.7165760745844,
+      "avg_latency_ms": 0.0,
+      "p95_latency_ms": 0.0,
+      "error_rate_percent": 0.0,
+      "cpu_usage_percent": 8.18909090909091,
+      "memory_usage_mb": 8105.874431818182
+    },
+    "redis": {
+      "throughput_msg_per_sec": 608.0710790303871,
+      "avg_latency_ms": 1.01439166284929,
+      "p95_latency_ms": 1.451,
+      "error_rate_percent": 0.0,
+      "cpu_usage_percent": 8.112727272727273,
+      "memory_usage_mb": 8183.824715909091
+    }
+  }
+}

@@ -1,0 +1,323 @@
+{
+  "timestamp": "2025-08-31T16:29:55.473550+00:00",
+  "comparison_type": "broker_performance",
+  "results": [
+    {
+      "timestamp": "2025-08-31T16:28:43.715122+00:00",
+      "config": {
+        "broker": "kafka",
+        "duration": 60,
+        "message_rate": 1000,
+        "message_size": 1024,
+        "workers": 2,
+        "batch_size": 10,
+        "output_format": "json",
+        "results_dir": "./results/20250831"
+      },
+      "total_messages": 42516,
+      "duration_seconds": 60.02995991706848,
+      "messages_per_second": 708.2463499681817,
+      "avg_latency_ms": 1.0,
+      "p95_latency_ms": 2.0,
+      "p99_latency_ms": 5.0,
+      "error_count": 0,
+      "error_rate": 0.0,
+      "cpu_usage_percent": 8.196363636363635,
+      "memory_usage_mb": 7704.445738636364,
+      "broker_metrics": {
+        "broker_count": 1,
+        "topic": "benchmark-topic",
+        "partitions": 3,
+        "replication_factor": 1,
+        "compression": "gzip",
+        "total_messages_produced": 42516,
+        "errors": 0
+      }
+    },
+    {
+      "timestamp": "2025-08-31T16:29:49.679649+00:00",
+      "config": {
+        "broker": "kafka",
+        "duration": 60,
+        "message_rate": 3000,
+        "message_size": 1024,
+        "workers": 4,
+        "batch_size": 10,
+        "output_format": "json",
+        "results_dir": "./results/20250831"
+      },
+      "total_messages": 112384,
+      "duration_seconds": 60.017772912979126,
+      "messages_per_second": 1872.5120001194919,
+      "avg_latency_ms": 1.0,
+      "p95_latency_ms": 2.0,
+      "p99_latency_ms": 5.0,
+      "error_count": 0,
+      "error_rate": 0.0,
+      "cpu_usage_percent": 9.045454545454545,
+      "memory_usage_mb": 7727.970170454545,
+      "broker_metrics": {
+        "broker_count": 1,
+        "topic": "benchmark-topic",
+        "partitions": 3,
+        "replication_factor": 1,
+        "compression": "gzip",
+        "total_messages_produced": 112384,
+        "errors": 0
+      }
+    },
+    {
+      "timestamp": "2025-08-31T15:31:02.475889+00:00",
+      "config": {
+        "broker": "rabbitmq",
+        "duration": 60,
+        "message_rate": 1000,
+        "message_size": 1024,
+        "workers": 2,
+        "batch_size": 10,
+        "output_format": "json",
+        "results_dir": "./results/20250831"
+      },
+      "total_messages": 31738,
+      "duration_seconds": 60.1421320438385,
+      "messages_per_second": 527.7165760745844,
+      "avg_latency_ms": 0.0,
+      "p95_latency_ms": 0.0,
+      "p99_latency_ms": 0.0,
+      "error_count": 0,
+      "error_rate": 0.0,
+      "cpu_usage_percent": 8.18909090909091,
+      "memory_usage_mb": 8105.874431818182,
+      "broker_metrics": {
+        "queue_name": "benchmark-queue",
+        "exchange": "benchmark-queue_exchange",
+        "routing_key": "benchmark-queue",
+        "durable": true
+      }
+    },
+    {
+      "timestamp": "2025-08-31T15:49:09.510491+00:00",
+      "config": {
+        "broker": "rabbitmq",
+        "duration": 60,
+        "message_rate": 1000,
+        "message_size": 1024,
+        "workers": 2,
+        "batch_size": 10,
+        "output_format": "json",
+        "results_dir": "./results/20250831"
+      },
+      "total_messages": 31782,
+      "duration_seconds": 59.9401273727417,
+      "messages_per_second": 530.2291034912472,
+      "avg_latency_ms": 0.0,
+      "p95_latency_ms": 0.0,
+      "p99_latency_ms": 0.0,
+      "error_count": 0,
+      "error_rate": 0.0,
+      "cpu_usage_percent": 8.06181818181818,
+      "memory_usage_mb": 7947.786079545454,
+      "broker_metrics": {
+        "queue_name": "benchmark-queue",
+        "exchange": "benchmark-queue_exchange",
+        "routing_key": "benchmark-queue",
+        "durable": true
+      }
+    },
+    {
+      "timestamp": "2025-08-31T15:50:15.627948+00:00",
+      "config": {
+        "broker": "rabbitmq",
+        "duration": 60,
+        "message_rate": 2500,
+        "message_size": 1024,
+        "workers": 4,
+        "batch_size": 10,
+        "output_format": "json",
+        "results_dir": "./results/20250831"
+      },
+      "total_messages": 77698,
+      "duration_seconds": 60.120615005493164,
+      "messages_per_second": 1292.368682404543,
+      "avg_latency_ms": 0.0,
+      "p95_latency_ms": 0.0,
+      "p99_latency_ms": 0.0,
+      "error_count": 0,
+      "error_rate": 0.0,
+      "cpu_usage_percent": 6.78,
+      "memory_usage_mb": 7892.645738636364,
+      "broker_metrics": {
+        "queue_name": "benchmark-queue",
+        "exchange": "benchmark-queue_exchange",
+        "routing_key": "benchmark-queue",
+        "durable": true
+      }
+    },
+    {
+      "timestamp": "2025-08-31T15:27:32.044737+00:00",
+      "config": {
+        "broker": "redis",
+        "duration": 60,
+        "message_rate": 1000,
+        "message_size": 1024,
+        "workers": 2,
+        "batch_size": 10,
+        "output_format": "json",
+        "results_dir": "./results/20250831"
+      },
+      "total_messages": 36555,
+      "duration_seconds": 60.1163272857666,
+      "messages_per_second": 608.0710790303871,
+      "avg_latency_ms": 1.01439166284929,
+      "p95_latency_ms": 1.451,
+      "p99_latency_ms": 1.99,
+      "error_count": 0,
+      "error_rate": 0.0,
+      "cpu_usage_percent": 8.112727272727273,
+      "memory_usage_mb": 8183.824715909091,
+      "broker_metrics": {
+        "redis_version": "7.4.5",
+        "used_memory": 1121928,
+        "used_memory_human": "1.07M",
+        "connected_clients": 1,
+        "total_commands_processed": 73120,
+        "instantaneous_ops_per_sec": 1185,
+        "keyspace_hits": 0,
+        "keyspace_misses": 0,
+        "test_type": "lists",
+        "queue_name": "benchmark-queue"
+      }
+    },
+    {
+      "timestamp": "2025-08-31T15:46:50.007591+00:00",
+      "config": {
+        "broker": "redis",
+        "duration": 60,
+        "message_rate": 1000,
+        "message_size": 1024,
+        "workers": 2,
+        "batch_size": 10,
+        "output_format": "json",
+        "results_dir": "./results/20250831"
+      },
+      "total_messages": 36707,
+      "duration_seconds": 60.112468242645264,
+      "messages_per_second": 610.6387089585377,
+      "avg_latency_ms": 1.0119018057006417,
+      "p95_latency_ms": 1.443,
+      "p99_latency_ms": 1.9959,
+      "error_count": 0,
+      "error_rate": 0.0,
+      "cpu_usage_percent": 8.33090909090909,
+      "memory_usage_mb": 7850.754261363636,
+      "broker_metrics": {
+        "redis_version": "7.4.5",
+        "used_memory": 1147856,
+        "used_memory_human": "1.09M",
+        "connected_clients": 1,
+        "total_commands_processed": 396364,
+        "instantaneous_ops_per_sec": 1154,
+        "keyspace_hits": 0,
+        "keyspace_misses": 0,
+        "test_type": "lists",
+        "queue_name": "benchmark-queue"
+      }
+    },
+    {
+      "timestamp": "2025-08-31T15:47:55.446278+00:00",
+      "config": {
+        "broker": "redis",
+        "duration": 60,
+        "message_rate": 3000,
+        "message_size": 1024,
+        "workers": 4,
+        "batch_size": 10,
+        "output_format": "json",
+        "results_dir": "./results/20250831"
+      },
+      "total_messages": 116212,
+      "duration_seconds": 60.11387228965759,
+      "messages_per_second": 1933.197705847905,
+      "avg_latency_ms": 0.8220478267894652,
+      "p95_latency_ms": 1.146,
+      "p99_latency_ms": 1.9028,
+      "error_count": 0,
+      "error_rate": 0.0,
+      "cpu_usage_percent": 6.616363636363636,
+      "memory_usage_mb": 7859.540625,
+      "broker_metrics": {
+        "redis_version": "7.4.5",
+        "used_memory": 1147856,
+        "used_memory_human": "1.09M",
+        "connected_clients": 1,
+        "total_commands_processed": 628802,
+        "instantaneous_ops_per_sec": 3700,
+        "keyspace_hits": 0,
+        "keyspace_misses": 0,
+        "test_type": "lists",
+        "queue_name": "benchmark-queue"
+      }
+    },
+    {
+      "timestamp": "2025-08-31T15:52:53.226258+00:00",
+      "config": {
+        "broker": "redis",
+        "duration": 30,
+        "message_rate": 5000,
+        "message_size": 1024,
+        "workers": 4,
+        "batch_size": 10,
+        "output_format": "json",
+        "results_dir": "./results/20250831"
+      },
+      "total_messages": 99490,
+      "duration_seconds": 30.110378980636597,
+      "messages_per_second": 3304.176279680176,
+      "avg_latency_ms": 0.44911887668918915,
+      "p95_latency_ms": 0.618,
+      "p99_latency_ms": 2.24254,
+      "error_count": 0,
+      "error_rate": 0.0,
+      "cpu_usage_percent": 4.228571428571429,
+      "memory_usage_mb": 7877.203125,
+      "broker_metrics": {
+        "redis_version": "7.4.5",
+        "used_memory": 1146512,
+        "used_memory_human": "1.09M",
+        "connected_clients": 1,
+        "total_commands_processed": 827797,
+        "instantaneous_ops_per_sec": 6365,
+        "keyspace_hits": 0,
+        "keyspace_misses": 0,
+        "test_type": "lists",
+        "queue_name": "benchmark-queue"
+      }
+    }
+  ],
+  "summary": {
+    "kafka": {
+      "throughput_msg_per_sec": 1872.5120001194919,
+      "avg_latency_ms": 1.0,
+      "p95_latency_ms": 2.0,
+      "error_rate_percent": 0.0,
+      "cpu_usage_percent": 9.045454545454545,
+      "memory_usage_mb": 7727.970170454545
+    },
+    "rabbitmq": {
+      "throughput_msg_per_sec": 1292.368682404543,
+      "avg_latency_ms": 0.0,
+      "p95_latency_ms": 0.0,
+      "error_rate_percent": 0.0,
+      "cpu_usage_percent": 6.78,
+      "memory_usage_mb": 7892.645738636364
+    },
+    "redis": {
+      "throughput_msg_per_sec": 3304.176279680176,
+      "avg_latency_ms": 0.44911887668918915,
+      "p95_latency_ms": 0.618,
+      "error_rate_percent": 0.0,
+      "cpu_usage_percent": 4.228571428571429,
+      "memory_usage_mb": 7877.203125
+    }
+  }
+}

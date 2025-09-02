@@ -1,0 +1,32 @@
+{
+  "timestamp": "2025-08-31T16:28:43.715122+00:00",
+  "config": {
+    "broker": "kafka",
+    "duration": 60,
+    "message_rate": 1000,
+    "message_size": 1024,
+    "workers": 2,
+    "batch_size": 10,
+    "output_format": "json",
+    "results_dir": "./results/20250831"
+  },
+  "total_messages": 42516,
+  "duration_seconds": 60.02995991706848,
+  "messages_per_second": 708.2463499681817,
+  "avg_latency_ms": 1.0,
+  "p95_latency_ms": 2.0,
+  "p99_latency_ms": 5.0,
+  "error_count": 0,
+  "error_rate": 0.0,
+  "cpu_usage_percent": 8.196363636363635,
+  "memory_usage_mb": 7704.445738636364,
+  "broker_metrics": {
+    "broker_count": 1,
+    "topic": "benchmark-topic",
+    "partitions": 3,
+    "replication_factor": 1,
+    "compression": "gzip",
+    "total_messages_produced": 42516,
+    "errors": 0
+  }
+}

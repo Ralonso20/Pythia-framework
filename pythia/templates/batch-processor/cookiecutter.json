@@ -1,0 +1,15 @@
+{
+  "worker_name": "my-batch-processor",
+  "description": "A batch processing worker",
+  "author": "Developer",
+  "email": "developer@example.com",
+  "broker_type": "kafka",
+  "topics": "batch-jobs",
+  "group_id": "batch-group",
+  "bootstrap_servers": "localhost:9092",
+  "batch_size": "10",
+  "max_wait_time": "5.0",
+  "python_version": "3.11",
+  "use_pydantic": "yes",
+  "add_metrics": "yes"
+}

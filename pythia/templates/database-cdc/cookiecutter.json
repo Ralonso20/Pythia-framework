@@ -1,0 +1,8 @@
+{
+    "worker_name": "my_cdc_worker",
+    "connection_string": "postgresql://user:password@localhost:5432/dbname",
+    "tables": "table1,table2",
+    "poll_interval": "5.0",
+    "timestamp_column": "updated_at",
+    "python_version": "3.9"
+}

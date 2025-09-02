@@ -1,0 +1,99 @@
+server:
+  http_listen_port: 3200
+  log_level: info
+
+distributor:
+  receivers:
+    # Jaeger receiver
+    jaeger:
+      protocols:
+        thrift_http:
+          endpoint: 0.0.0.0:14268
+        grpc:
+          endpoint: 0.0.0.0:14250
+        thrift_binary:
+          endpoint: 0.0.0.0:6832
+        thrift_compact:
+          endpoint: 0.0.0.0:6831
+
+    # Zipkin receiver
+    zipkin:
+      endpoint: 0.0.0.0:9411
+
+    # OpenTelemetry receiver
+    otlp:
+      protocols:
+        http:
+          endpoint: 0.0.0.0:4318
+        grpc:
+          endpoint: 0.0.0.0:4317
+
+ingester:
+  # How long to wait before considering a trace complete
+  trace_idle_period: 10s
+
+  # Maximum size of a block before cutting it
+  max_block_bytes: 1_000_000
+
+  # Maximum time before cutting a block
+  max_block_duration: 5m
+
+compactor:
+  compaction:
+    # How long to retain compacted blocks
+    compacted_block_retention: 1h
+
+# Query frontend configuration
+query_frontend:
+  search:
+    # Maximum duration of search queries
+    duration_slo: 5s
+
+    # Maximum number of traces to return
+    max_result_limit: 1000
+
+  # Trace by ID queries
+  trace_by_id:
+    # Duration SLO for trace by ID queries
+    duration_slo: 5s
+
+storage:
+  trace:
+    backend: local
+    local:
+      path: /tmp/tempo/traces
+    pool:
+      max_workers: 100
+      queue_depth: 10000
+
+# Metrics generator configuration (optional)
+metrics_generator:
+  registry:
+    external_labels:
+      source: tempo
+      cluster: docker-compose
+  storage:
+    path: /tmp/tempo/generator/wal
+    remote_write:
+      - url: http://prometheus:9090/api/v1/write
+        send_exemplars: true
+
+# Overrides for specific tenants (multi-tenant setup)
+overrides:
+  defaults:
+    # Maximum number of traces per user
+    max_traces_per_user: 10000
+
+    # Maximum number of bytes per trace
+    max_bytes_per_trace: 50000000  # 50MB
+
+    # Ingestion rate limit (traces per second per user)
+    ingestion_rate_limit_bytes: 20000000  # 20MB/s
+
+    # Burst size for ingestion rate limiting
+    ingestion_burst_size_bytes: 30000000  # 30MB
+
+# Memberlist configuration for clustering (single node setup)
+memberlist:
+  abort_if_cluster_join_fails: false
+  join_members: []

@@ -1,0 +1,15 @@
+{
+  "worker_name": "my-pipeline-worker",
+  "description": "A multi-stage pipeline worker",
+  "author": "Developer",
+  "email": "developer@example.com",
+  "broker_type": "kafka",
+  "topics": "pipeline-input",
+  "group_id": "pipeline-group",
+  "bootstrap_servers": "localhost:9092",
+  "pipeline_stages": "validate,transform,enrich,output",
+  "max_concurrent_stages": "3",
+  "python_version": "3.11",
+  "use_pydantic": "yes",
+  "add_metrics": "yes"
+}

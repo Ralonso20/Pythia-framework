@@ -1,0 +1,14 @@
+{
+  "worker_name": "my-redis-worker",
+  "description": "A Redis Streams consumer worker",
+  "author": "Developer",
+  "email": "developer@example.com",
+  "redis_url": "redis://localhost:6379",
+  "stream": "my-stream",
+  "consumer_group": "my-group",
+  "consumer_name": "worker-1",
+  "block_timeout": "1000",
+  "python_version": "3.11",
+  "use_pydantic": "yes",
+  "add_metrics": "yes"
+}

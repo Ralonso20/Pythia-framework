@@ -1,0 +1,220 @@
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[project]
+name = "pythia-framework"
+version = "1.0.1"
+description = "A modern library for creating efficient and scalable workers in Python"
+readme = "README.md"
+license = "MIT"
+requires-python = ">=3.11"
+keywords = ["worker", "message-queue", "kafka", "rabbitmq", "redis", "async", "background-jobs", "microservices", "distributed-systems"]
+authors = [
+    {name = "Pythia Contributors"},
+]
+maintainers = [
+    {name = "Pythia Contributors"},
+]
+classifiers = [
+    "Development Status :: 4 - Beta",
+    "Intended Audience :: Developers",
+    "License :: OSI Approved :: MIT License",
+    "Operating System :: OS Independent",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Topic :: Software Development :: Libraries :: Python Modules",
+    "Topic :: System :: Distributed Computing",
+    "Topic :: Communications",
+    "Framework :: AsyncIO",
+]
+
+dependencies = [
+    # HTTP & Async
+    "httpx==0.28.1",
+    "asyncio",
+    # Configuration & Validation
+    "pydantic==2.11.7",
+    "pydantic-settings==2.10.1",
+    # Logging & Monitoring
+    "loguru==0.7.3",
+    "prometheus-client==0.22.1",
+    # Retry & Resilience
+    "tenacity==9.1.2",
+    # CLI & Development
+    "click==8.2.1",
+    "rich==14.1.0",
+    "watchfiles==1.1.0",
+    "cookiecutter==2.1.1",
+    "psutil>=5.9.0",
+]
+
+[project.urls]
+Homepage = "https://github.com/pythia-framework/pythia"
+Documentation = "https://pythia-framework.github.io/pythia/"
+Repository = "https://github.com/pythia-framework/pythia"
+"Bug Tracker" = "https://github.com/pythia-framework/pythia/issues"
+
+[project.optional-dependencies]
+# Message Brokers
+kafka = [
+    "confluent-kafka==2.11.1",
+]
+rabbitmq = [
+    "aio-pika==9.5.7",
+]
+redis = [
+    "redis==6.4.0",
+]
+database = [
+    "sqlalchemy[asyncio]>=2.0.0",
+    "aiosqlite>=0.20.0",  # For SQLite async support
+]
+# Cloud Providers
+aws = [
+    "boto3>=1.34.0",
+]
+gcp = [
+    "google-cloud-pubsub>=2.18.0",
+]
+azure = [
+    "azure-servicebus>=7.11.0",
+    "azure-storage-queue>=12.7.0",
+]
+# Bundles
+brokers = ["pythia-framework[kafka,rabbitmq,redis]"]
+cloud = ["pythia-framework[aws,gcp,azure]"]
+all = ["pythia-framework[kafka,rabbitmq,redis,database,aws,gcp,azure,monitoring]"]
+# Monitoring & Observability
+monitoring = [
+    # OpenTelemetry core
+    "opentelemetry-api>=1.15.0",
+    "opentelemetry-sdk>=1.15.0",
+    # OpenTelemetry exporters
+    "opentelemetry-exporter-otlp>=1.15.0",
+    "opentelemetry-exporter-prometheus<1.10.0",
+    # OpenTelemetry instrumentation
+    "opentelemetry-instrumentation>=0.36b0",
+    # APM providers (optional)
+    "datadog==0.52.1",
+    "newrelic==10.16.0",
+]
+# Testing
+test = [
+    "pytest>=8.4.1",
+    "pytest-asyncio>=1.1.0",
+    "pytest-cov>=6.0.0",
+    "pytest-benchmark>=4.0.0",
+    "pytest-mock>=3.12.0",
+    "pytest-xdist>=3.5.0",
+    "pytest-timeout>=2.3.0",
+    "pytest-clarity>=1.0.1",
+    "testcontainers>=3.7.0",
+    "factory-boy>=3.3.0",
+    "freezegun>=1.2.0",
+    "responses>=0.24.0",
+    "coverage>=7.0.0",
+]
+
+[project.scripts]
+pythia = "pythia.cli.main:main"
+
+[dependency-groups]
+database = [
+    "aiosqlite>=0.20.0",
+    "sqlalchemy[asyncio]>=2.0.0",
+]
+dev = [
+    "ruff==0.12.10",
+    "pre-commit==4.3.0",
+    "faker>=27.0.0",
+    "docker>=7.0.0",
+]
+
+[tool.ruff]
+# Exclude problematic directories from linting
+exclude = [
+    "tests",
+    "benchmarks",
+    "pythia/cli",
+    "pythia/templates",
+    "roadmap",
+    ".pytest_cache",
+    ".git",
+    "__pycache__",
+    "*.egg-info",
+]
+
+line-length = 100
+target-version = "py311"
+
+[tool.ruff.lint]
+# Enable pyflakes (`F`) and pycodestyle (`E`) codes by default.
+select = ["E4", "E7", "E9", "F"]
+ignore = []
+
+# Allow fix for all enabled rules (when `--fix`) is provided.
+fixable = ["ALL"]
+unfixable = []
+
+# Allow unused variables when underscore-prefixed.
+dummy-variable-rgx = "^(_+|(_+[a-zA-Z0-9_]*[a-zA-Z0-9]+?))$"
+
+[tool.ruff.format]
+quote-style = "double"
+indent-style = "space"
+skip-magic-trailing-comma = false
+line-ending = "auto"
+
+[tool.uv]
+package = true
+
+[tool.hatch.build.targets.wheel]
+packages = ["pythia"]
+exclude = [
+  "tests",
+  "benchmarks",
+  "examples",
+  "docs",
+  "roadmap",
+  ".github",
+  ".pytest_cache",
+  ".ruff_cache",
+  ".venv",
+  ".benchmarks",
+  "*.db",
+  "*.py.orig",
+  "main.py",
+  "example_worker.py",
+  "setup_example.py",
+  "run_cloud_benchmarks.py",
+  ".coverage",
+  "uv.lock",
+  ".DS_Store",
+  "RELEASE_*.md"
+]
+
+[tool.hatch.build.targets.sdist]
+exclude = [
+  "tests",
+  "benchmarks",
+  "examples",
+  "docs",
+  "roadmap",
+  ".github",
+  ".pytest_cache",
+  ".ruff_cache",
+  ".venv",
+  ".benchmarks",
+  "*.db",
+  "*.py.orig",
+  "main.py",
+  "example_worker.py",
+  "setup_example.py",
+  "run_cloud_benchmarks.py",
+  ".coverage",
+  "uv.lock",
+  ".DS_Store",
+  "RELEASE_*.md"
+]

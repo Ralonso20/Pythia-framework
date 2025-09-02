@@ -1,0 +1,15 @@
+{
+  "worker_name": "my-rabbitmq-worker",
+  "description": "A RabbitMQ consumer worker",
+  "author": "Developer",
+  "email": "developer@example.com",
+  "rabbitmq_url": "amqp://guest:guest@localhost:5672/",
+  "queue": "my-queue",
+  "exchange": "",
+  "routing_key": "",
+  "durable": "true",
+  "python_version": "3.11",
+  "use_pydantic": "yes",
+  "add_health_checks": "yes",
+  "add_metrics": "yes"
+}

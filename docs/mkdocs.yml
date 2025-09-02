@@ -1,0 +1,96 @@
+site_name: Pythia Framework
+site_description: Modern Python Worker Framework for Scalable Message Processing
+site_url: https://ralonso20.github.io/pythia/
+repo_url: https://github.com/ralonso20/pythia
+repo_name: pythia
+
+theme:
+  name: material
+  logo: assets/images/logo_minimal_invert_color.webp
+  favicon: assets/images/logo_minimal_not_background.png
+  palette:
+    # Palette toggle for light mode
+    - scheme: default
+      primary: "#006141"
+      accent: "#006141"
+      toggle:
+        icon: material/brightness-7
+        name: Switch to dark mode
+    # Palette toggle for dark mode
+    - scheme: slate
+      primary: "#006141"
+      accent: "#006141"
+      toggle:
+        icon: material/brightness-4
+        name: Switch to light mode
+  features:
+    - navigation.tabs
+    - navigation.sections
+    - navigation.expand
+    - navigation.top
+    - search.highlight
+    - search.share
+    - content.code.copy
+    - navigation.instant
+
+markdown_extensions:
+  - pymdownx.highlight:
+      anchor_linenums: true
+      line_spans: __span
+      pygments_lang_class: true
+  - pymdownx.inlinehilite
+  - pymdownx.snippets
+  - pymdownx.superfences
+  - pymdownx.tabbed:
+      alternate_style: true
+  - pymdownx.tasklist:
+      custom_checkbox: true
+  - admonition
+  - pymdownx.details
+  - attr_list
+  - md_in_html
+
+nav:
+  - Home: index.md
+  - Getting Started:
+    - Installation: getting-started/installation.md
+    - Quick Start: getting-started/quick-start.md
+    - Your First Worker: getting-started/first-worker.md
+  - User Guide:
+    - Worker Lifecycle: user-guide/worker-lifecycle.md
+    - Message Handling: user-guide/message-handling.md
+    - Configuration: user-guide/configuration.md
+    - Logging: user-guide/logging.md
+    - Observability: user-guide/observability.md
+    - Testing Observability: user-guide/testing-observability.md
+    - Error Handling: user-guide/error-handling.md
+  - Broker Integration:
+    - Redis: brokers/redis.md
+    - Kafka: brokers/kafka.md
+    - RabbitMQ: brokers/rabbitmq.md
+    - Database: brokers/database.md
+    - HTTP: brokers/http.md
+    - Cloud Queues: brokers/cloud.md
+  - Performance:
+    - Benchmarks: performance/benchmarks.md
+    - Optimization: performance/optimization.md
+    - Scaling: performance/scaling.md
+  - API Reference:
+    - Core Classes: api/core.md
+    - Worker Classes: api/workers.md
+    - Broker Interfaces: api/brokers.md
+  - Examples:
+    - Basic Worker: examples/basic-worker.md
+    - Background Jobs: examples/background-jobs.md
+    - Database CDC: examples/database-cdc.md
+    - Database Sync: examples/database-sync.md
+    - HTTP Workers: examples/http-workers.md
+    - AWS SQS/SNS: examples/aws-cloud.md
+    - GCP Pub/Sub: examples/gcp-cloud.md
+    - Azure Service Bus: examples/azure-cloud.md
+
+plugins:
+  - search
+
+extra_css:
+  - assets/stylesheets/pythia-overrides.css

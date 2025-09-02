@@ -1,0 +1,16 @@
+{
+  "worker_name": "my-kafka-worker",
+  "description": "A Kafka consumer worker",
+  "author": "Developer",
+  "email": "developer@example.com",
+  "topics": "my-topic",
+  "group_id": "my-group",
+  "bootstrap_servers": "localhost:9092",
+  "auto_offset_reset": "earliest",
+  "enable_auto_commit": "true",
+  "max_poll_records": "500",
+  "python_version": "3.11",
+  "use_pydantic": "yes",
+  "add_health_checks": "yes",
+  "add_metrics": "yes"
+}

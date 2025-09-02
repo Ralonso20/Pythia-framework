@@ -1,0 +1,29 @@
+{
+  "timestamp": "2025-08-31T15:50:15.627948+00:00",
+  "config": {
+    "broker": "rabbitmq",
+    "duration": 60,
+    "message_rate": 2500,
+    "message_size": 1024,
+    "workers": 4,
+    "batch_size": 10,
+    "output_format": "json",
+    "results_dir": "./results/20250831"
+  },
+  "total_messages": 77698,
+  "duration_seconds": 60.120615005493164,
+  "messages_per_second": 1292.368682404543,
+  "avg_latency_ms": 0.0,
+  "p95_latency_ms": 0.0,
+  "p99_latency_ms": 0.0,
+  "error_count": 0,
+  "error_rate": 0.0,
+  "cpu_usage_percent": 6.78,
+  "memory_usage_mb": 7892.645738636364,
+  "broker_metrics": {
+    "queue_name": "benchmark-queue",
+    "exchange": "benchmark-queue_exchange",
+    "routing_key": "benchmark-queue",
+    "durable": true
+  }
+}
