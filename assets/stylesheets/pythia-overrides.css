@@ -1,0 +1,35 @@
+/* Overrides to support a custom hex primary/accent color for MkDocs Material
+   The Material theme generates selectors for named palettes (teal, green, etc.).
+   When a hex value is used (e.g. "#006141") those selectors don't match.
+   This file forces the relevant CSS variables when the data attributes contain the hex.
+*/
+
+[data-md-color-primary="#006141"],
+[data-md-color-primary="#006141"][data-md-color-scheme="slate"] {
+  --md-primary-fg-color: #006141;
+  --md-primary-fg-color--light: #2b8a6f;
+  --md-primary-fg-color--dark: #004a33;
+  --md-primary-bg-color: #fff;
+  --md-primary-bg-color--light: #ffffffb3;
+  --md-typeset-a-color: #006141;
+}
+
+[data-md-color-accent="#006141"] {
+  --md-accent-fg-color: #006141;
+  --md-accent-fg-color--transparent: #0061411a;
+  --md-accent-bg-color: #fff;
+  --md-accent-bg-color--light: #ffffffb3;
+}
+
+/* Slate (dark) tweaks: ensure links/buttons remain visible on dark backgrounds */
+[data-md-color-scheme="slate"][data-md-color-primary="#006141"] {
+  --md-typeset-a-color: #66b89b;
+  --md-primary-fg-color: #66b89b;
+}
+
+/* Small utility: primary buttons */
+.md-button--primary {
+  background-color: var(--md-typeset-a-color) !important;
+  border-color: var(--md-typeset-a-color) !important;
+  color: #fff !important;
+}
