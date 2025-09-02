@@ -10,7 +10,7 @@
   [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
   [![Downloads](https://pepy.tech/badge/pythia-framework)](https://pepy.tech/project/pythia-framework)
   [![CI/CD](https://github.com/pythia-framework/pythia/workflows/CI%2FCD%20Pipeline/badge.svg)](https://github.com/pythia-framework/pythia/actions)
-  [![codecov](https://codecov.io/gh/pythia-framework/pythia/branch/master/graph/badge.svg)](https://codecov.io/gh/pythia-framework/pythia)
+  [![codecov](https://codecov.io/github/Ralonso20/Pythia-framework/graph/badge.svg?token=b6n9A4sNae)](https://codecov.io/github/Ralonso20/Pythia-framework)
   [![Documentation Status](https://img.shields.io/badge/docs-mkdocs-blue.svg)](https://pythia-framework.github.io/pythia/)
   [![Code style: black](https://img.shields.io/badge/code%20style-ruff-000000.svg)](https://github.com/astral-sh/ruff)
   [![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg)](https://github.com/pythia-framework/pythia/pulls)
