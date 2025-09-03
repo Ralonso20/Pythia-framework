@@ -28,7 +28,7 @@ def monitor():
 @click.option("--worker", help="Specific worker to monitor")
 @click.option("--refresh", default=2, help="Refresh interval in seconds")
 @click.option("--stats-file", help="Path to worker stats file")
-def worker(worker_name: Optional[str], refresh: int, stats_file: Optional[str]):
+def worker(worker: Optional[str], refresh: int, stats_file: Optional[str]):
     """
     Monitor worker metrics and status
 
@@ -43,11 +43,11 @@ def worker(worker_name: Optional[str], refresh: int, stats_file: Optional[str]):
 
     try:
         with Live(
-            generate_worker_display(worker_name, stats_file),
+            generate_worker_display(worker, stats_file),
             refresh_per_second=1 / refresh,
         ) as live:
             while True:
-                live.update(generate_worker_display(worker_name, stats_file))
+                live.update(generate_worker_display(worker, stats_file))
                 time.sleep(refresh)
 
     except KeyboardInterrupt:

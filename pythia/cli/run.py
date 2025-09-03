@@ -158,7 +158,7 @@ def run_with_reload(worker_path: Path, watch_dir: str, ignore_patterns: tuple) -
         }
         all_ignore = set(ignore_patterns) | default_ignore
 
-        for changes in watch(watch_path, ignore_paths=all_ignore):
+        for changes in watch(watch_path):
             if not changes:
                 continue
 
