@@ -196,8 +196,8 @@ class KafkaConsumer(BaseConsumer):
             # Critical errors that should stop consumption
             critical_errors = [
                 KafkaError._AUTHENTICATION,
-                KafkaError._AUTHORIZATION,
                 KafkaError._ALL_BROKERS_DOWN,
+                KafkaError._FATAL,
             ]
 
             return error.code() in critical_errors
